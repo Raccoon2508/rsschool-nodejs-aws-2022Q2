@@ -29,3 +29,12 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## S3 Link
+
+http://kot-enot-shop.s3-website-us-east-1.amazonaws.com/
+
+## CloudFront link
+
+https://d1osoe7xggmxl3.cloudfront.net
+
