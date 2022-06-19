@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Product } from './product.interface';
 
 import { ApiService } from '../core/api.service';
+import { BASE_URL, API_URL } from '../core/api.const';
 
 @Injectable({
   providedIn: 'root',
@@ -56,15 +57,9 @@ export class ProductsService extends ApiService {
   }
 
   getProducts(): Observable<Product[]> {
-    if (!this.endpointEnabled('bff')) {
-      console.warn(
-        'Endpoint "bff" is disabled. To enable change your environment.ts config'
-      );
-      return this.http.get<Product[]>('/assets/products.json');
-    }
-
-    const url = this.getUrl('bff', 'products');
-    return this.http.get<Product[]>(url);
+    return this.http
+      .get<{ products: Product[] }>(BASE_URL + API_URL.products)
+      .pipe(map((data) => data.products));
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {
